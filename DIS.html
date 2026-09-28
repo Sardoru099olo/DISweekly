@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIS Weekly | Deira International School</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2a86;
+    --red: #e8384f;
+    --orange: #f5a623;
+    --green: #2fa36b;
+    --paper: #ffffff;
+    --tint: #f3f5fb;
+    --ink: #1c2033;
+    --muted: #5b6078;
+    --head: "Baloo 2", "Trebuchet MS", sans-serif;
+    --body: "Nunito", "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: var(--body); color: var(--ink); background: var(--tint); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+
+  /* Masthead */
+  header { background: var(--paper); text-align: center; padding: 28px 16px 0; }
+  .school { color: var(--muted); font-size: .95rem; }
+  h1 { font-family: var(--head); font-weight: 800; font-size: clamp(2.6rem, 9vw, 5rem); color: var(--navy); line-height: 1.05; }
+  h1 span { color: var(--red); }
+  .swoosh { display: block; width: 100%; height: 40px; margin-top: 6px; }
+
+  /* Nav */
+  nav { background: var(--navy); position: sticky; top: 0; z-index: 5; }
+  nav ul { list-style: none; padding: 0; display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  nav button {
+    font: 600 1rem var(--body); color: #fff; background: none; border: 0;
+    padding: 12px 18px; cursor: pointer; border-bottom: 4px solid transparent;
+  }
+  nav button:hover { background: rgba(255,255,255,.1); }
+  nav button[aria-pressed="true"] { border-bottom-color: var(--orange); }
+
+  /* Layout */
+  main { max-width: 1050px; margin: 0 auto; padding: 28px 16px 48px; display: grid; grid-template-columns: 1fr 300px; gap: 28px; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .tag { display: inline-block; font-size: .8rem; font-weight: 600; padding: 2px 12px; border-radius: 99px; color: #fff; }
+  .News { background: var(--navy); } .Sports { background: var(--red); }
+  .Arts { background: var(--orange); color: var(--ink); } .Clubs { background: var(--green); }
+
+  .lead { background: var(--navy); color: #fff; border-radius: 18px; padding: 28px; margin-bottom: 24px; }
+  .lead h2 { font-family: var(--head); font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.2; margin: 10px 0; }
+  .lead p { opacity: .9; }
+  .byline { font-size: .85rem; color: var(--muted); }
+  .lead .byline { color: #c9cff5; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+  article.story { background: var(--paper); border-radius: 14px; padding: 20px; border-top: 5px solid var(--navy); }
+  article.story[data-cat="Sports"] { border-color: var(--red); }
+  article.story[data-cat="Arts"] { border-color: var(--orange); }
+  article.story[data-cat="Clubs"] { border-color: var(--green); }
+  article.story h3 { font-family: var(--head); font-size: 1.25rem; line-height: 1.25; margin: 8px 0 6px; }
+  article.story p { font-size: .95rem; color: var(--muted); margin-bottom: 8px; }
+  .empty { display: none; color: var(--muted); padding: 24px 0; }
+
+  /* Sidebar */
+  aside section { background: var(--paper); border-radius: 14px; padding: 20px; margin-bottom: 18px; }
+  aside h2 { font-family: var(--head); font-size: 1.3rem; color: var(--navy); margin-bottom: 10px; }
+  aside ul { list-style: none; padding: 0; }
+  aside li { padding: 8px 0; border-bottom: 1px solid var(--tint); font-size: .95rem; }
+  aside li:last-child { border: 0; }
+  aside li b { color: var(--red); }
+  form { display: grid; gap: 8px; }
+  input, button.submit { font: inherit; padding: 10px 12px; border-radius: 10px; border: 2px solid #d5d9ec; }
+  button.submit { background: var(--red); color: #fff; border-color: var(--red); font-weight: 600; cursor: pointer; }
+  button.submit:hover { background: #cf2b41; }
+  #thanks { display: none; color: var(--green); font-weight: 600; }
+
+  footer { background: var(--navy); color: #c9cff5; text-align: center; padding: 20px; font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="school">Deira International School · Festival City</p>
+  <h1>DIS <span>Weekly</span></h1>
+  <svg class="swoosh" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 26 C200 0 350 40 550 20 S850 4 1000 22 L1000 40 L0 40 Z" fill="#2fa36b"/>
+    <path d="M0 34 C220 12 380 44 560 28 S860 14 1000 30 L1000 40 L0 40 Z" fill="#1a2a86" opacity=".9"/>
+  </svg>
+</header>
+
+<nav aria-label="Sections">
+  <ul id="filters">
+    <li><button aria-pressed="true" data-filter="All">All</button></li>
+    <li><button aria-pressed="false" data-filter="News">News</button></li>
+    <li><button aria-pressed="false" data-filter="Sports">Sports</button></li>
+    <li><button aria-pressed="false" data-filter="Arts">Arts</button></li>
+    <li><button aria-pressed="false" data-filter="Clubs">Clubs</button></li>
+  </ul>
+</nav>
+
+<main>
+  <div>
+    <section class="lead" aria-label="Top story">
+      <span class="tag News">News</span>
+      <h2>Student Council announces new garden project for the courtyard</h2>
+      <p>Students from every year group will help plant herbs and flowers this term, with a launch day planned for next month.</p>
+      <p class="byline">By the DIS Weekly team · 28 September 2026</p>
+    </section>
+
+    <div class="grid" id="stories"></div>
+    <p class="empty" id="empty">No stories in this section yet.</p>
+  </div>
+
+  <aside>
+    <section>
+      <h2>This week</h2>
+      <ul>
+        <li><b>Mon</b> Assembly, Year 7–9</li>
+        <li><b>Wed</b> Football trials</li>
+        <li><b>Thu</b> Art club exhibition</li>
+        <li><b>Fri</b> Spelling bee finals</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Send us a story</h2>
+      <form id="tipForm">
+        <input type="text" placeholder="Your name" required aria-label="Your name">
+        <input type="text" placeholder="Story idea" required aria-label="Story idea">
+        <button class="submit" type="submit">Send idea</button>
+        <p id="thanks" role="status">Thanks! The editors will read it.</p>
+      </form>
+    </section>
+  </aside>
+</main>
+
+<footer>DIS Weekly · Written by students of Deira International School</footer>
+
+<script>
+  // Edit this list to add or change stories
+  const stories = [
+    { cat: "Sports", title: "U14 football team wins the regional cup", text: "A last-minute goal sealed a 2–1 victory on Saturday.", by: "Omar K." },
+    { cat: "Arts", title: "Year 10 drama group rehearses 'The Lion King Jr.'", text: "Auditions are done and the set is being painted this week.", by: "Sara M." },
+    { cat: "Clubs", title: "Robotics club builds its first line-following robot", text: "Members tested the robot on a track made from black tape.", by: "Ali R." },
+    { cat: "News", title: "Library extends opening hours before exams", text: "Students can now study until 5 pm from Monday to Thursday.", by: "Maya T." },
+    { cat: "Arts", title: "Student photos to be shown in the main hall", text: "Ten photographs about 'My Dubai' were chosen by the judges.", by: "Lina H." },
+    { cat: "Sports", title: "Swimming gala: new school record in 50m freestyle", text: "Yusuf from Year 9 finished in a personal best time.", by: "Zayed A." }
+  ];
+
+  const list = document.getElementById("stories");
+  const empty = document.getElementById("empty");
+
+  function render(filter) {
+    const shown = stories.filter(s => filter === "All" || s.cat === filter);
+    list.innerHTML = shown.map(s => `
+      <article class="story" data-cat="${s.cat}">
+        <span class="tag ${s.cat}">${s.cat}</span>
+        <h3>${s.title}</h3>
+        <p>${s.text}</p>
+        <span class="byline">By ${s.by}</span>
+      </article>`).join("");
+    empty.style.display = shown.length ? "none" : "block";
+  }
+
+  document.getElementById("filters").addEventListener("click", e => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    document.querySelectorAll("#filters button").forEach(b => b.setAttribute("aria-pressed", b === btn));
+    render(btn.dataset.filter);
+  });
+
+  document.getElementById("tipForm").addEventListener("submit", e => {
+    e.preventDefault();
+    e.target.reset();
+    document.getElementById("thanks").style.display = "block";
+  });
+
+  render("All");
+</script>
+</body>
+</html>
